@@ -20,7 +20,16 @@ class UserController extends Controller
         return view('backend.user.add');
 
     }
-    public function store(){}
+    public function store(Request $request){
+        // $data=array();
+		// $data['department_name']=$request->department_name;
+		// $data['publication_status']=$request->publication_status;
+		// $department=DB::table('departments')->insert($data);
+		// return response()->json($request);
+		// echo '<pre>';
+		// print_r($data);
+
+    }
     public function edit($id){}
     public function update($id){}
     public function delete($id){}
