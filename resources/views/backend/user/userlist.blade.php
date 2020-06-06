@@ -1,5 +1,18 @@
 @extends('backend.master')
 @section('content')
+<div class="page-title">
+    <div class="title_left">
+      <h3>All User Are Hear</h3>
+    </div>
+
+    <div class="title_right">
+      <div class="pull-right" style="margin: 10px">
+        <a href="{{route('user.add')}}" class="btn btn-success btn-sm"><i class="fa fa-plus" aria-hidden="true"> </i> Add New</a>
+    </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="row">
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
       <div class="x_title">
@@ -23,9 +36,6 @@
           <div class="row">
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
-                        <div class="pull-right" style="margin: 10px">
-                            <a href="{{route('user.add')}}" class="btn btn-success btn-sm"><i class="fa fa-plus" aria-hidden="true"> </i> Add New</a>
-                        </div>
                         <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
                             <thead>
                                 <tr>
@@ -64,5 +74,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
