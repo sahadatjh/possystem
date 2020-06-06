@@ -53,7 +53,12 @@
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>
-                                        <img src="{{asset('public/backend/asset/images/img.jpg')}}" alt="Photo" class="img-circle" style="height:40px;width:40px">
+                                        @if ($row->image)
+                                            <img src="{{asset($row->image)}}" alt="Photo" class="img-circle" style="height:40px;width:40px">
+                                        @else
+                                        <img src="{{asset('public/backend/asset/images/user.png')}}" alt="Photo" class="img-circle" style="height:40px;width:40px">
+                                        @endif
+                                       
                                     </td>
                                     <td>{{$row->name}}</td>
                                     <td>{{$row->mobile}}</td>
@@ -61,7 +66,7 @@
                                     <td>{{$row->access_level}}</td>
                                     <td>
                                         <a href="{{route('user.view',$row->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <a href="#" class="btn btn-sm btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a href="{{route('user.edit',$row->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>  

@@ -3,7 +3,7 @@
 <div class="">
   <div class="page-title">
     <div class="title_left">
-      <h3>Add New User</h3>
+      <h3>Edit User Profile</h3>
     </div>
 
     <div class="title_right">
@@ -18,7 +18,7 @@
     <div class="col-md-12 col-sm-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>User create form <small>give your all information</small></h2>
+          <h2>User Information Update <small>Update your information</small></h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -52,43 +52,29 @@
               <label class="col-form-label col-md-3 col-sm-3  label-align">Full Name<span
                   class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="text" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="ex. Sahadat Hossain" required="required" />
+                <input class="form-control" type="text" data-validate-length-range="6" data-validate-words="1" name="name" value="{{$user->name}}" required="required" />
               </div>
             </div>
             <div class="field item form-group">
               <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span
                   class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
-                <input class="form-control" name="email" class='email' required="required" type="email"  placeholder="ex. sahadat@gmail.com"/></div>
+                <input class="form-control" name="email" class='email' required="required" type="email" value="{{$user->email}}"  /></div>
             </div>
             <div class="field item form-group">
               <label class="col-form-label col-md-3 col-sm-3  label-align">Mobile Number<span
                   class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="text" class='number' name="mobile" placeholder="Ex. 01756603812" required='required'></div>
-            </div>
-            <div class="field item form-group">
-              <label class="col-form-label col-md-3 col-sm-3  label-align">Password<span
-                  class="required">*</span></label>
-              <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="password" name="password" data-validate-length="6,8"
-                  required='required' /></div>
-            </div>
-            <div class="field item form-group">
-              <label class="col-form-label col-md-3 col-sm-3  label-align">Repeat password<span
-                  class="required">*</span></label>
-              <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="password" name="password2" data-validate-linked='password'
-                  required='required' /></div>
-            </div>
+                <input class="form-control" type="text" class='number' name="mobile" value="{{$user->mobile}}" required='required'></div>
+            </div>            
             <div class="field item form-group">
               <label class="col-form-label col-md-3 col-sm-3  label-align">User Level<span class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
                 <select class="form-control" name="access_level">
                   <option value="">Choose option</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
+                  <option value="1" {{($user->access_level==1)?'selected':''}}>1</option>
+                  <option value="2" {{($user->access_level==2)?'selected':''}}>2</option>
+                  <option value="3" {{($user->access_level==3)?'selected':''}}>3</option>
                 </select>
               </div>
             </div>
@@ -96,13 +82,15 @@
               <label class="col-form-label col-md-3 col-sm-3  label-align">Address<span
                   class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
-                <textarea name='address' class="form-control" rows="3"  required="required"></textarea>
+                <textarea name='address' class="form-control" rows="3"  required="required">{{$user->address}}</textarea>
               </div>
             </div>
             <div class="field item form-group">
               <label class="col-form-label col-md-3 col-sm-3  label-align">Photo<span class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
                 <input class="form-control" name="image" type="file" />
+                <img src="{{asset($user->image)}}" alt="no image" style="height: 150px; margin: 10px;padding:3px; border: 1px solid #000">
+                <img src="{{asset($user->image)}}" alt="no image" style="height: 150px; margin: 10px;padding:3px; border: 1px solid #000">
               </div>
             </div>
             <div class="ln_solid">

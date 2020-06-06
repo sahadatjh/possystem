@@ -45,10 +45,10 @@
                 <div class="profile_img">
                 <div id="crop-avatar">
                     <!-- Current avatar -->
-                    <img class="img-responsive avatar-view" src="{{asset('public/backend/asset/images/picture.jpg')}}" alt="Avatar" title="Change the avatar">
+                    <img class="img-responsive avatar-view" src="{{asset($user->image)}}" alt="Avatar" title="Change the avatar" style="height: 220px; width: 220px">
                 </div>
                 </div>
-                <h3>Samuel Doe</h3>
+                <h3>{{$user->name}}</h3>
 
                 <ul class="list-unstyled user_data">
                 <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
