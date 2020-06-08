@@ -61,6 +61,8 @@ class UserController extends Controller
         $user=DB::table('users')->where('id',$id)->first();
         return view('backend.user.edit',['user'=>$user]);
     }
-    public function update($id){}
+    public function update(Request $request, $id){
+        
+    }
     public function delete($id){}
 }

@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('address',250)->nullable();
             $table->string('image')->nullable();
             $table->tinyInteger('access_level')->default('1');
+            $table->tinyInteger('acctivation_status')->default('1');
             $table->integer('created_by')->nullable();            
             $table->rememberToken();
             $table->timestamps();
