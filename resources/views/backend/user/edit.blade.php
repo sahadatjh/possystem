@@ -36,7 +36,7 @@
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
-          <form method="post" action="{{route('user.store')}}" enctype="multipart/form-data" novalidate>
+          <form method="post" action="{{route('user.update')}}" enctype="multipart/form-data" novalidate>
            @csrf
             <span class="section">User Information</span>
             @if ($errors->any())
@@ -53,13 +53,14 @@
                   class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
                 <input class="form-control" type="text" data-validate-length-range="6" data-validate-words="1" name="name" value="{{$user->name}}" required="required" />
+                <input type="hidden"  name="id" value="{{$user->id}}" required="required" />
               </div>
             </div>
             <div class="field item form-group">
               <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span
                   class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
-                <input class="form-control" name="email" class='email' required="required" type="email" value="{{$user->email}}"  /></div>
+                <input class="form-control" disabled name="email" class='email' type="email" value="{{$user->email}}"  /></div>
             </div>
             <div class="field item form-group">
               <label class="col-form-label col-md-3 col-sm-3  label-align">Mobile Number<span
@@ -89,7 +90,7 @@
               <label class="col-form-label col-md-3 col-sm-3  label-align">Photo<span class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
                 <input class="form-control" name="image" type="file" />
-                <img src="{{asset($user->image)}}" alt="no image" style="height: 150px; margin: 10px;padding:3px; border: 1px solid #000">
+                <img src="{{asset($user->image)}}" name="oldphoto" alt="no image" style="height: 150px; margin: 10px;padding:3px; border: 1px solid #000">
                 <img src="{{asset($user->image)}}" alt="no image" style="height: 150px; margin: 10px;padding:3px; border: 1px solid #000">
               </div>
             </div>
