@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Gentelella Alela! | </title>
+    <title>Point of Sell </title>
 
     <!-- Bootstrap -->
     <link href="{{asset('public/backend/asset/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -25,14 +25,15 @@
     <link href="{{asset('public/backend/asset/jqvmap/dist/jqvmap.min.css')}}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{asset('public/backend/asset/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
-    <!-- Datatables -->        
-    <link href="{{asset('public/backend/asset/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/backend/asset/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/backend/asset/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/backend/asset/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/backend/asset/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
+    <!--Datatables-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <!-- Custom Theme Style -->
     <link href="{{asset('public/backend/css/custom.min.css')}}" rel="stylesheet">
+    <style type="text/css">
+    .notifyjs-corner{
+      z-index: 10000 !important;
+    }
+    </style>
   </head>
 
   <body class="nav-md">
@@ -143,6 +144,8 @@
         <!-- page content -->
         <div class="right_col" role="main">
           @yield('content')
+
+         
         </div>
         <!-- /page content -->
 
@@ -156,8 +159,17 @@
         <!-- /footer content -->
       </div>
     </div>
-
-
+<script type="text/javascript">
+  function check_delete(){
+    var chk = confirm("Are you sure DELETE this???");
+    if (chk) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+</script>
+{{-- form field validation --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{asset('public/backend/asset')}}/validator/multifield.js"></script>
     <script src="{{asset('public/backend/asset')}}/validator/validator.js"></script>
@@ -184,7 +196,8 @@
           $('form .alert').remove();
       }).prop('checked', false);
     </script>
-  
+  {{-- end form field validator --}}
+
 
     <!-- jQuery -->
     <script src="{{asset('public/backend/asset/jquery/dist/jquery.min.js')}}"></script>
@@ -227,24 +240,45 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{asset('public/backend/asset/moment/min/moment.min.js')}}"></script>
     <script src="{{asset('public/backend/asset/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-    <!-- Datatables -->
-    <script src="{{asset('public/backend/asset/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
-    <script src="{{asset('public/backend/asset/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/jszip/dist/jszip.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/pdfmake/build/pdfmake.min.js')}}"></script>
-    <script src="{{asset('public/backend/asset/pdfmake/build/vfs_fonts.js')}}"></script>
+    <!--Notify js-->
+    <script type="text/javascript" src="{{asset('public/backend/asset/notifyjs/notify.min.js')}}"></script>
+    <!--Datatables-->
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('#mytable').DataTable();
+    } );
+    </script>
     <!-- Custom Theme Scripts -->
     <script src="{{asset('public/backend/js/custom.min.js')}}"></script>
+  
+    <!--code for show image when select-->
+  <script type="text/javascript">
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+          $('#blah').attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+      }
+    }
+    
+    $("#imgInp").change(function() {
+      readURL(this);
+    });
+    </script>
+<!--notifyjs-->
+@if (session()->has('success'))
+<script type="text/javascript">
+  $(function(){
+    $.notify("{{session()->get('success')}}",{globalPosition:'top right',className:'success'});
+  });
+</script>    
+@endif
 	
   </body>
 </html>

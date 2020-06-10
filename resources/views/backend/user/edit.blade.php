@@ -60,7 +60,7 @@
               <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span
                   class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
-                <input class="form-control" disabled name="email" class='email' type="email" value="{{$user->email}}"  /></div>
+                <input class="form-control" name="email" class='email' type="email" value="{{$user->email}}"  /></div>
             </div>
             <div class="field item form-group">
               <label class="col-form-label col-md-3 col-sm-3  label-align">Mobile Number<span
@@ -91,7 +91,7 @@
               <div class="col-md-6 col-sm-6">
                 <input class="form-control" name="image" type="file" />
                 <img src="{{asset($user->image)}}" name="oldphoto" alt="no image" style="height: 150px; margin: 10px;padding:3px; border: 1px solid #000">
-                <img src="{{asset($user->image)}}" alt="no image" style="height: 150px; margin: 10px;padding:3px; border: 1px solid #000">
+                <input type="hidden" name="oldphoto" value="{{$user->image}}">
               </div>
             </div>
             <div class="ln_solid">

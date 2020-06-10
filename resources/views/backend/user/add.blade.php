@@ -36,7 +36,7 @@
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
-          <form method="post" action="{{route('user.store')}}" enctype="multipart/form-data" novalidate>
+          <form method="post" action="{{route('user.store')}}" enctype="multipart/form-data" runat="server" novalidate>
            @csrf
             <span class="section">User Information</span>
             @if ($errors->any())
@@ -102,7 +102,8 @@
             <div class="field item form-group">
               <label class="col-form-label col-md-3 col-sm-3  label-align">Photo<span class="required">*</span></label>
               <div class="col-md-6 col-sm-6">
-                <input class="form-control" name="image" type="file" />
+                <input class="form-control" name="image" type="file"  id="imgInp" />
+                <img id="blah" src="#" alt="your image" style="height: 150px; margin: 10px;padding:3px; border: 1px solid #000" />
               </div>
             </div>
             <div class="ln_solid">

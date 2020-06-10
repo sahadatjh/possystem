@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class UserController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $data=array();
         $data['users']=DB::table('users')->get();
@@ -27,7 +32,7 @@ class UserController extends Controller
         $request->validate([
 	        'name' => 'required|max:200|min:4',
 	        'mobile' => 'required|max:13|min:11',
-	        'email' => 'required|email|max:100',
+	        'email' => 'required|email|max:100|unique:users',
 	        'image' => 'mimes:jpeg,jpg,png,gif|max:1000',
         ]);
         
@@ -37,6 +42,7 @@ class UserController extends Controller
 		$data['mobile']=$request->mobile;
 		$data['password']= Hash::make($request->password);
 		$data['access_level']=$request->access_level;
+		$data['created_by']=Auth::user()->id;
 		$data['address']=$request->address;
 		$image=$request->file('image');
     	if ($image) {
@@ -44,7 +50,7 @@ class UserController extends Controller
             $ext=strtolower($image->getClientOriginalExtension());
             // echo $ext;
     		$image_full_name=$image_name.'.'.$ext;
-    		$upload_path='public/backend/images/';
+    		$upload_path='public/backend/uploads/';
     		$image_url=$upload_path.$image_full_name;
     		$success=$image->move($upload_path,$image_full_name);
 			$data['image']=$image_url;
@@ -54,7 +60,6 @@ class UserController extends Controller
     	} else {
     		DB::table('users')->insert($data);
             return redirect()->route('user.list')->with('success','data inserted successfully!!!');
-			
     	}
     }
     public function edit($id){
@@ -65,14 +70,14 @@ class UserController extends Controller
         $request->validate([
 	        'name' => 'required|max:200|min:4',
 	        'mobile' => 'required|max:13|min:11',
-	        // 'email' => 'required|email|max:100',
+	        'email' => 'required|email|max:100',
 	        'image' => 'mimes:jpeg,jpg,png,gif|max:1000',
         ]);
 
 	    $data=array();
 		$id=$request->id;
 		$data['name']=$request->name;
-		// $data['email']=$request->email;
+		$data['email']=$request->email;
 		$data['mobile']=$request->mobile;
 		$data['password']= Hash::make($request->password);
 		$data['access_level']=$request->access_level;
@@ -82,7 +87,7 @@ class UserController extends Controller
 		   $image_name=hexdec(uniqid());
 		   $ext=strtolower($image->getClientOriginalExtension());
 		   $image_full_name=$image_name.'.'.$ext;
-		   $upload_path='public/backend/images/';
+		   $upload_path='public/backend/uploads/';
 		   $image_url=$upload_path.$image_full_name;
 		   $success=$image->move($upload_path,$image_full_name);
 		   $data['image']=$image_url;
@@ -95,8 +100,16 @@ class UserController extends Controller
             $data['image']=$request->oldphoto;
             
 			DB::table('users')->where('id',$id)->update($data);
-            return redirect()->route('user.list')->with('success','data inserted successfully!!!');
+            return redirect()->route('user.list')->with('success','data updated successfully!!!');
 	   }
     }
-    public function delete($id){}
+    public function delete($id){
+		$select_user=DB::table('users')->where('id',$id)->first();
+		if($select_user->image){
+			unlink($select_user->image);
+		}
+		$deleted=DB::table('users')->where('id',$id)->delete();
+
+		return redirect()->route('user.list')->with('success','data deleted successfully!!!');
+	}
 }

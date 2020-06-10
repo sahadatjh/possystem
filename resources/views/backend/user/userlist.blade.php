@@ -36,7 +36,7 @@
           <div class="row">
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
-                        <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
+                        <table id="mytable" class="table table-striped table-bordered " style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Sl No</th>
@@ -67,10 +67,9 @@
                                     <td>
                                         <a href="{{route('user.view',$row->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         <a href="{{route('user.edit',$row->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a href="{{route('user.delete',$row->id)}}" id="delete"class="btn btn-sm btn-danger" onclick="return check_delete();"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
-                                </tr>  
-                                
+                                </tr>
                             @endforeach               
                             </tbody>
                         </table>
