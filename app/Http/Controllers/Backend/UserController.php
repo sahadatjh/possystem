@@ -13,7 +13,7 @@ class UserController extends Controller
 	public function __construct()
     {
         $this->middleware('auth');
-    }
+	}
     public function index(){
         $data=array();
         $data['users']=DB::table('users')->get();
@@ -44,6 +44,7 @@ class UserController extends Controller
 		$data['access_level']=$request->access_level;
 		$data['created_by']=Auth::user()->id;
 		$data['address']=$request->address;
+		// $data['created_at']=  new DateTime('now');//date('Y-m-d H:i:s');
 		$image=$request->file('image');
     	if ($image) {
     		$image_name=hexdec(uniqid());

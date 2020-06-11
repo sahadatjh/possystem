@@ -27,13 +27,10 @@
     <link href="{{asset('public/backend/asset/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
     <!--Datatables-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    {{-- Toster --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <!-- Custom Theme Style -->
     <link href="{{asset('public/backend/css/custom.min.css')}}" rel="stylesheet">
-    <style type="text/css">
-    .notifyjs-corner{
-      z-index: 10000 !important;
-    }
-    </style>
   </head>
 
   <body class="nav-md">
@@ -211,7 +208,6 @@
     <script src="{{asset('public/backend/asset/Chart.js/dist/Chart.min.js')}}"></script>
     <!-- gauge.js -->
     <script src="{{asset('public/backend/asset/gauge.js/dist/gauge.min.js')}}"></script>
-    
     <!-- morris.js -->
     <script src="{{asset('public/backend/asset/raphael/raphael.min.js')}}"></script>
     <script src="{{asset('public/backend/asset/morris.js/morris.min.js')}}"></script>
@@ -240,45 +236,57 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{asset('public/backend/asset/moment/min/moment.min.js')}}"></script>
     <script src="{{asset('public/backend/asset/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-    <!--Notify js-->
-    <script type="text/javascript" src="{{asset('public/backend/asset/notifyjs/notify.min.js')}}"></script>
+    {{-- Toster --}}
+    <script type="text/JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" ></script>
     <!--Datatables-->
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    
-    <script type="text/javascript">
-    $(document).ready(function() {
-      $('#mytable').DataTable();
-    } );
-    </script>
+    {{-- Datatables --}}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#mytable').DataTable();
+  } );
+  </script>
     <!-- Custom Theme Scripts -->
     <script src="{{asset('public/backend/js/custom.min.js')}}"></script>
   
+
     <!--code for show image when select-->
   <script type="text/javascript">
     function readURL(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
-        
         reader.onload = function(e) {
           $('#blah').attr('src', e.target.result);
         }
-        
         reader.readAsDataURL(input.files[0]); // convert to base64 string
       }
     }
-    
     $("#imgInp").change(function() {
       readURL(this);
     });
     </script>
-<!--notifyjs-->
-@if (session()->has('success'))
-<script type="text/javascript">
-  $(function(){
-    $.notify("{{session()->get('success')}}",{globalPosition:'top right',className:'success'});
-  });
-</script>    
-@endif
-	
+  {{-- code for Toster --}}
+  <script type="text/javascript">
+    @if (Session::has('success')) 
+      toastr.success("{{ Session::get('success')}}");
+    @elseif(Session::has('error'))
+      toastr.error("{{ Session::get('error')}}");
+      // var type="{{ Session::get('alert-type','info')}}"
+      // switch(type){
+      //   case 'info':
+      //     toastr.info("{{ Session::get('messege')}}");
+      //     break;
+      //   case 'success':
+      //     toastr.success("{{ Session::get('messege')}}");
+      //     break;
+      //   case 'warning':
+      //     toastr.warning("{{ Session::get('messege')}}");
+      //     break;
+      //   case 'error':
+      //     toastr.error("{{ Session::get('messege')}}");
+      //     break;
+      // }
+    @endif
+  </script>
   </body>
 </html>
